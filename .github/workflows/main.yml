@@ -51,7 +51,9 @@ jobs:
       run: |
           echo ${KUBE_CONFIG_DATA} | base64 -d > .kubectl_config
           export KUBECONFIG=$KUBECONFIG:.kubectl_config
-          export PATH=/usr/bin/:$PATH
+          curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator
+          chmod +x aws-iam-authenticator
+          export PATH=.:$PATH
           aws-iam-authenticator help
           kubectl apply -f deploy.yaml
           kubectl apply -f service.yaml
