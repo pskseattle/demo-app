@@ -49,5 +49,5 @@ jobs:
       env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
-          KUBECONFIG=`echo ${KUBE_CONFIG_DATA} | base64 -D`
+          export KUBECONFIG=`echo ${KUBE_CONFIG_DATA} | base64 -d`
           kubectl config view
