@@ -48,7 +48,7 @@ jobs:
     - name: Trigger deploy
       env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      run:
+      run: |
           kubectl apply -f deploy.yaml
           kubectl apply -f service.yaml
           kubectl rollout status deployment/demo-app  
