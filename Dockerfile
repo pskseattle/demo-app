@@ -25,6 +25,4 @@ RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-releas
   chmod +x /usr/bin/kubectl && \
   kubectl version --client
   
-RUN curl -L -o /usr/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator && \
-    chmod +x /usr/bin/aws-iam-authenticator && \
-    aws-iam-authenticator help
+
