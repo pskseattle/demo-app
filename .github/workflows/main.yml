@@ -45,10 +45,15 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
         
-    - name: Trigger deploy
+    - name: Trigger EKS Deploy
       env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
           echo ${KUBE_CONFIG_DATA} | base64 -d > .kubectl_config
           export KUBECONFIG=$KUBECONFIG:.kubectl_config
-          kubectl config view
+          kubectl apply -f deploy.yaml
+          kubectl apply -f service.yaml
+          kubectl rollout status deployment/demo-app
+          kubectl get svc
+          kubectl describe svc
+          kubectl get deployment
