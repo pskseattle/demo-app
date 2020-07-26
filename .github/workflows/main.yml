@@ -51,6 +51,7 @@ jobs:
       run: |
           echo ${KUBE_CONFIG_DATA} | base64 -d > .kubectl_config
           export KUBECONFIG=$KUBECONFIG:.kubectl_config
+          export PATH=/usr/bin/:$PATH
           kubectl apply -f deploy.yaml
           kubectl apply -f service.yaml
           kubectl rollout status deployment/demo-app
