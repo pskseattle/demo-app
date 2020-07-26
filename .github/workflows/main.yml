@@ -54,10 +54,10 @@ jobs:
           which kubectl
           which date
           which ls
-          curl -L -o /usr/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator 
-          chmod +x /usr/bin/aws-iam-authenticator
+          curl -L -o /bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator 
+          chmod +x /bin/aws-iam-authenticator
           aws-iam-authenticator help
-          export PATH=/usr/bin/:$PATH
+          export PATH=/bin/:$PATH
           kubectl apply -f deploy.yaml
           kubectl apply -f service.yaml
           kubectl rollout status deployment/demo-app
