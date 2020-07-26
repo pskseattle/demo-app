@@ -46,8 +46,10 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
         
     - name: Trigger deploy
-      uses: Consensys/kubernetes-action@master
       env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      with:
-          args: rollout status deployment/demo-app
+      run:
+          kubectl apply -f deploy.yaml
+          kubectl apply -f service.yaml
+          kubectl rollout status deployment/demo-app  
+          kubectl get services -o wide
