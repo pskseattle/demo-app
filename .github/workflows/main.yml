@@ -56,9 +56,9 @@ jobs:
           chmod +x aws-iam-authenticator
           export PATH=.:$PATH
           aws-iam-authenticator help
-          kubectl apply -f deploy.yaml
+          kubectl set image deployment/demo-app demo-app=${{ steps.build-image.outputs.image }} --record
           kubectl apply -f service.yaml
-          #kubectl rollout status deployment/demo-app
+          kubectl rollout status deployment/demo-app
           kubectl get svc
           kubectl describe svc
           kubectl get deployment
